@@ -3,25 +3,128 @@
 @tailwind utilities;
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --navy: #05427B;
+  --green: #3CAA35;
+  --surface: #F4F9F4;
+  --dark: #0D1B2A;
+  --brand: #1A1A2E;
+  --green-tint: #EEF7EE;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html {
+  scroll-behavior: smooth;
+  /* Prevent horizontal overflow on mobile */
+  overflow-x: hidden;
 }
 
 body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-inter), system-ui, sans-serif;
+  color: var(--brand);
+  font-size: 16px;
+  line-height: 1.75;
+  overflow-x: hidden;
 }
 
-@layer utilities {
-  .text-balance {
-    text-wrap: balance;
+/* ─── Responsive section padding helper ─── */
+.section-pad {
+  @apply py-16 sm:py-20 lg:py-24;
+}
+
+@layer components {
+  .eyebrow {
+    @apply font-inter text-xs font-medium tracking-[0.15em] uppercase text-gold;
   }
+
+  .section-heading {
+    @apply font-baskerville text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-brand leading-tight;
+  }
+
+  .section-heading-white {
+    @apply font-baskerville text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-white leading-tight;
+  }
+
+  .btn-gold {
+    @apply inline-flex items-center gap-2 bg-[#3CAA35] text-white font-inter font-semibold text-sm px-6 py-3 rounded-full transition-all duration-300 hover:bg-[#2e8f29] hover:shadow-lg hover:-translate-y-0.5;
+  }
+
+  .btn-outline-white {
+    @apply inline-flex items-center gap-2 border border-white text-white font-inter font-semibold text-sm px-6 py-3 rounded-full transition-all duration-300 hover:bg-white hover:text-navy;
+  }
+
+  .card-shadow {
+    @apply shadow-[0_4px_24px_rgba(0,0,0,0.08)] hover:shadow-[0_8px_40px_rgba(0,0,0,0.14)] transition-all duration-300;
+  }
+
+  /* Responsive container padding */
+  .px-responsive {
+    @apply px-4 sm:px-6 lg:px-8;
+  }
+}
+
+/* ── Green accent border on service cards ── */
+.gold-top-border {
+  border-top: 3px solid #3CAA35;
+}
+
+/* ── Video overlay ── */
+.video-overlay {
+  background: rgba(5, 66, 123, 0.65);
+}
+
+/* ── Mobile: tap targets should be at least 44×44 px ── */
+@media (max-width: 1023px) {
+  a, button {
+    min-height: 36px;
+  }
+}
+
+/* ── Smooth image loading ── */
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+/* ── Focus visible ring for accessibility ── */
+:focus-visible {
+  outline: 2px solid #3CAA35;
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+/* ─────────────────────────────────────────────
+   Custom scrollbar — brand colours
+   Green thumb (#3CAA35) on navy track (#05427B)
+   Works in Chrome, Safari, Edge (WebKit/Blink)
+   + Firefox via scrollbar-color
+───────────────────────────────────────────── */
+
+/* Firefox */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #3CAA35 #05427B;
+}
+
+/* WebKit (Chrome, Safari, Edge) */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #05427B;
+  border-radius: 999px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #3CAA35;
+  border-radius: 999px;
+  border: 2px solid #05427B; /* creates a small gap / outline effect */
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #2e8f29;
+}
+
+::-webkit-scrollbar-corner {
+  background: #05427B;
 }
