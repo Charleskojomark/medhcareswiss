@@ -85,7 +85,7 @@ export default function WhyChooseUs() {
                 transition={{
                   duration: 0.55,
                   delay: 0.15 + i * 0.12,
-                  ease: [0.22, 1, 0.36, 1],
+                  ease: [0.22, 1, 0.36, 1] as [number, number, number, number],
                 }}
               whileHover={{
                 scale: 1.04,

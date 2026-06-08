@@ -58,7 +58,7 @@ export default function Specialists() {
               transition={{
                 duration: 0.6,
                 delay: 0.15 + i * 0.15,
-                ease: [0.22, 1, 0.36, 1],
+                ease: [0.22, 1, 0.36, 1] as [number, number, number, number],
               }}
               whileHover={{
                 y: -8,
@@ -91,7 +91,7 @@ export default function Specialists() {
                   transition={{
                     duration: 0.8,
                     delay: 0.4 + i * 0.15,
-                    ease: [0.22, 1, 0.36, 1],
+                    ease: [0.22, 1, 0.36, 1] as [number, number, number, number],
                   }}
                   style={{ originX: 0, width: "100%" }}
                 />

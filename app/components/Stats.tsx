@@ -65,7 +65,7 @@ export default function Stats() {
             ref={ref}
             initial={{ opacity: 0, y: 20 }}
             animate={inView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+            transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] as [number, number, number, number] }}
             className="section-heading max-w-3xl mx-auto mb-3 sm:mb-4"
           >
             Plan your medical tourism journey with MedHcareSwiss SNC
@@ -90,7 +90,7 @@ export default function Stats() {
               transition={{
                 duration: 0.55,
                 delay: 0.2 + i * 0.1,
-                ease: [0.22, 1, 0.36, 1],
+                ease: [0.22, 1, 0.36, 1] as [number, number, number, number],
               }}
               whileHover={{
                 y: -6,

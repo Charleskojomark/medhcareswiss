@@ -66,7 +66,7 @@ export default function Testimonials() {
               transition={{
                 duration: 0.55,
                 delay: 0.1 + i * 0.1,
-                ease: [0.22, 1, 0.36, 1],
+                ease: [0.22, 1, 0.36, 1] as [number, number, number, number],
               }}
               whileHover={{
                 y: -6,

@@ -19,7 +19,7 @@ const containerVariants = {
 
 const itemVariants = {
   hidden: { opacity: 0, x: -20 },
-  show: { opacity: 1, x: 0, transition: { duration: 0.5, ease: [0.22, 1, 0.36, 1] } },
+  show: { opacity: 1, x: 0, transition: { duration: 0.5, ease: [0.22, 1, 0.36, 1] as [number, number, number, number] } },
 };
 
 export default function About() {
@@ -77,7 +77,7 @@ export default function About() {
                 transition={{
                   duration: 0.5,
                   delay: 0.3 + i * 0.1,
-                  ease: [0.22, 1, 0.36, 1],
+                  ease: [0.22, 1, 0.36, 1] as [number, number, number, number],
                 }}
                 whileHover={{ scale: 1.03, x: 4 }}
                 className="flex items-center gap-2 sm:gap-3 bg-surface rounded-xl px-3 sm:px-4 py-2.5 sm:py-3 border-l-4 border-[#3CAA35] cursor-default"
@@ -95,7 +95,7 @@ export default function About() {
         <motion.div
           initial={{ opacity: 0, x: 40, scale: 0.97 }}
           animate={inView ? { opacity: 1, x: 0, scale: 1 } : {}}
-          transition={{ duration: 0.7, delay: 0.15, ease: [0.22, 1, 0.36, 1] }}
+          transition={{ duration: 0.7, delay: 0.15, ease: [0.22, 1, 0.36, 1] as [number, number, number, number] }}
           whileHover={{ scale: 1.02, rotate: 0.8 }}
           className="relative h-64 sm:h-80 lg:h-[500px] rounded-2xl sm:rounded-3xl overflow-hidden shadow-2xl order-first lg:order-last"
           style={{ transformOrigin: "center center" }}

@@ -38,7 +38,7 @@ export default function TrustBar() {
               transition={{
                 duration: 0.5,
                 delay: i * 0.1,
-                ease: [0.22, 1, 0.36, 1],
+                ease: [0.22, 1, 0.36, 1] as [number, number, number, number],
               }}
               whileHover={{ y: -3, scale: 1.04 }}
               className="text-center py-4 sm:py-4 sm:px-8 cursor-default"
