@@ -28,7 +28,7 @@ export default function Specialists() {
   const inView = useInView(ref, { once: true, margin: "-80px" });
 
   return (
-    <section id="specialists" className="py-14 sm:py-20 lg:py-24 bg-[#F4F9F4]">
+    <section id="specialists" className="py-14 sm:py-20 lg:py-24 bg-[#F4F9F4] overflow-hidden">
       <div className="max-w-5xl mx-auto px-4 sm:px-6" ref={ref}>
         <div className="text-center mb-10 sm:mb-14">
           <motion.p
@@ -40,9 +40,9 @@ export default function Specialists() {
             Meet Our Leadership
           </motion.p>
           <motion.h2
-            initial={{ opacity: 0, y: 12 }}
+            initial={{ opacity: 0, y: 16 }}
             animate={inView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.4, delay: 0.1 }}
+            transition={{ duration: 0.5, delay: 0.1 }}
             className="section-heading"
           >
             The experts behind your care
@@ -53,10 +53,18 @@ export default function Specialists() {
           {specialists.map((specialist, i) => (
             <motion.div
               key={specialist.name}
-              initial={{ opacity: 0, y: 28 }}
-              animate={inView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.5, delay: 0.15 + i * 0.15 }}
-              className="bg-white rounded-2xl sm:rounded-3xl overflow-hidden card-shadow group"
+              initial={{ opacity: 0, y: 36, scale: 0.94 }}
+              animate={inView ? { opacity: 1, y: 0, scale: 1 } : {}}
+              transition={{
+                duration: 0.6,
+                delay: 0.15 + i * 0.15,
+                ease: [0.22, 1, 0.36, 1],
+              }}
+              whileHover={{
+                y: -8,
+                boxShadow: "0 24px 60px rgba(5,66,123,0.18)",
+              }}
+              className="bg-white rounded-2xl sm:rounded-3xl overflow-hidden card-shadow group cursor-default"
             >
               {/* Photo */}
               <div className="relative h-56 sm:h-72 w-full overflow-hidden bg-gray-100">
@@ -64,22 +72,49 @@ export default function Specialists() {
                   src={specialist.image}
                   alt={specialist.alt}
                   fill
-                  className="object-cover object-top group-hover:scale-105 transition-transform duration-500"
+                  className="object-cover object-top transition-transform duration-700 group-hover:scale-105"
+                />
+                {/* Gradient overlay that reveals on hover */}
+                <motion.div
+                  className="absolute inset-0 bg-gradient-to-t from-[#05427B]/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+                  aria-hidden="true"
                 />
               </div>
 
               {/* Info */}
-              <div className="p-5 sm:p-6">
+              <div className="p-5 sm:p-6 relative">
+                {/* Animated bottom border */}
+                <motion.div
+                  className="absolute bottom-0 left-0 h-[3px] bg-[#3CAA35] rounded-b-3xl"
+                  initial={{ scaleX: 0 }}
+                  animate={inView ? { scaleX: 1 } : {}}
+                  transition={{
+                    duration: 0.8,
+                    delay: 0.4 + i * 0.15,
+                    ease: [0.22, 1, 0.36, 1],
+                  }}
+                  style={{ originX: 0, width: "100%" }}
+                />
+
                 <div className="mb-1">
                   <h3 className="font-baskerville text-lg sm:text-xl font-bold text-[#1A1A2E] border-b-2 border-[#3CAA35] inline-block pb-0.5">
                     {specialist.name}
                   </h3>
                 </div>
-                <span className="inline-block mt-3 bg-[#05427B] text-white font-inter text-xs font-medium px-3 py-1 rounded-full mb-3">
+                <motion.span
+                  initial={{ opacity: 0, x: -10 }}
+                  animate={inView ? { opacity: 1, x: 0 } : {}}
+                  transition={{ delay: 0.5 + i * 0.15 }}
+                  className="inline-block mt-3 bg-[#05427B] text-white font-inter text-xs font-medium px-3 py-1 rounded-full mb-3"
+                >
                   {specialist.title}
-                </span>
+                </motion.span>
                 <div className="flex items-center gap-2 mb-3">
-                  <span className="w-2 h-2 rounded-full bg-[#3CAA35] flex-shrink-0" />
+                  <motion.span
+                    className="w-2 h-2 rounded-full bg-[#3CAA35] flex-shrink-0"
+                    animate={{ scale: [1, 1.3, 1] }}
+                    transition={{ duration: 2, repeat: Infinity }}
+                  />
                   <span className="font-inter text-xs text-gray-500 font-medium">
                     {specialist.badge}
                   </span>

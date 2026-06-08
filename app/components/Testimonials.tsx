@@ -2,28 +2,32 @@
 
 import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
-import { Quote } from "lucide-react";
+import { Quote, Star } from "lucide-react";
 
 const testimonials = [
   {
     text: "MedHcareSwiss gave our family peace of mind during a very stressful time. The doctors were incredibly thorough, and the nurses treated us with such kindness. We felt cared for every step of the way.",
     name: "Sarah K.",
     origin: "United Kingdom",
+    rating: 5,
   },
   {
     text: "Traveling from abroad for surgery was a big decision, but MedHcareSwiss made everything seamless. From airport pickup to world-class care, I couldn't have asked for better treatment.",
     name: "James A.",
     origin: "United States",
+    rating: 5,
   },
   {
     text: "I was admitted to MedHcareSwiss after a heart episode, and the emergency team saved my life. Their quick response and advanced equipment made all the difference. Forever thankful.",
     name: "Marie-Claire B.",
     origin: "France",
+    rating: 5,
   },
   {
     text: "The entire process from consultation to post-treatment care was exceptional. The medical tourism coordination made what could have been stressful completely worry-free.",
     name: "Oluwaseun O.",
     origin: "Nigeria",
+    rating: 5,
   },
 ];
 
@@ -32,7 +36,7 @@ export default function Testimonials() {
   const inView = useInView(ref, { once: true, margin: "-80px" });
 
   return (
-    <section className="py-24 bg-white">
+    <section className="py-24 bg-white overflow-hidden">
       <div className="max-w-7xl mx-auto px-6" ref={ref}>
         <div className="text-center mb-16">
           <motion.p
@@ -44,9 +48,9 @@ export default function Testimonials() {
             Patient Testimonials
           </motion.p>
           <motion.h2
-            initial={{ opacity: 0, y: 12 }}
+            initial={{ opacity: 0, y: 16 }}
             animate={inView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.4, delay: 0.1 }}
+            transition={{ duration: 0.5, delay: 0.1 }}
             className="section-heading"
           >
             Patients are saying
@@ -57,35 +61,71 @@ export default function Testimonials() {
           {testimonials.map((t, i) => (
             <motion.div
               key={i}
-              initial={{ opacity: 0, y: 24 }}
-              animate={inView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.4, delay: 0.1 + i * 0.1 }}
-              className="bg-surface rounded-2xl p-8 card-shadow relative overflow-hidden"
+              initial={{ opacity: 0, y: 28, scale: 0.96 }}
+              animate={inView ? { opacity: 1, y: 0, scale: 1 } : {}}
+              transition={{
+                duration: 0.55,
+                delay: 0.1 + i * 0.1,
+                ease: [0.22, 1, 0.36, 1],
+              }}
+              whileHover={{
+                y: -6,
+                boxShadow: "0 20px 50px rgba(60,170,53,0.14)",
+              }}
+              className="bg-surface rounded-2xl p-8 card-shadow relative overflow-hidden cursor-default group"
             >
+              {/* Animated gradient shimmer on hover */}
+              <motion.div
+                aria-hidden="true"
+                className="absolute inset-0 opacity-0 group-hover:opacity-100 pointer-events-none transition-opacity duration-500"
+                style={{
+                  background:
+                    "linear-gradient(135deg, rgba(60,170,53,0.05) 0%, transparent 50%)",
+                }}
+              />
+
+              {/* Large decorative quote */}
               <Quote
-                className="absolute top-6 right-6 w-12 h-12 text-gold opacity-20"
+                className="absolute top-4 right-4 w-16 h-16 text-[#3CAA35] opacity-10 group-hover:opacity-20 transition-opacity duration-300"
                 aria-hidden="true"
               />
-              <Quote
-                className="w-8 h-8 text-gold mb-4"
-                aria-hidden="true"
-              />
-              <blockquote className="font-inter text-gray-700 leading-relaxed mb-6">
+
+              {/* Star rating */}
+              <div className="flex gap-0.5 mb-3">
+                {Array.from({ length: t.rating }).map((_, si) => (
+                  <motion.div
+                    key={si}
+                    initial={{ opacity: 0, scale: 0 }}
+                    animate={inView ? { opacity: 1, scale: 1 } : {}}
+                    transition={{
+                      delay: 0.3 + i * 0.1 + si * 0.06,
+                      type: "spring",
+                      stiffness: 300,
+                    }}
+                  >
+                    <Star className="w-4 h-4 fill-[#3CAA35] text-[#3CAA35]" />
+                  </motion.div>
+                ))}
+              </div>
+
+              <blockquote className="font-inter text-gray-700 leading-relaxed mb-6 relative z-10">
                 &ldquo;{t.text}&rdquo;
               </blockquote>
+
               <div className="flex items-center gap-3">
-                <div className="w-10 h-10 rounded-full bg-navy/10 flex items-center justify-center font-baskerville font-bold text-navy text-sm">
+                <motion.div
+                  whileHover={{ scale: 1.1, rotate: 5 }}
+                  className="w-10 h-10 rounded-full bg-[#05427B]/10 flex items-center justify-center font-baskerville font-bold text-[#05427B] text-sm flex-shrink-0"
+                >
                   {t.name.charAt(0)}
-                </div>
+                </motion.div>
                 <div>
                   <p className="font-inter font-semibold text-brand text-sm">
                     {t.name}
                   </p>
-                  <p className="font-inter text-xs text-gray-500">
-                    {t.origin}
-                  </p>
+                  <p className="font-inter text-xs text-gray-500">{t.origin}</p>
                 </div>
-                <span className="ml-auto bg-gold/15 text-gold font-inter text-xs font-semibold px-3 py-1 rounded-full">
+                <span className="ml-auto bg-[#3CAA35]/15 text-[#3CAA35] font-inter text-xs font-semibold px-3 py-1 rounded-full">
                   Verified Patient
                 </span>
               </div>

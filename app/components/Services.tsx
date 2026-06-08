@@ -57,12 +57,26 @@ const services = [
   },
 ];
 
+const cardVariants = {
+  hidden: { opacity: 0, y: 32, scale: 0.95 },
+  show: (i: number) => ({
+    opacity: 1,
+    y: 0,
+    scale: 1,
+    transition: {
+      duration: 0.55,
+      delay: 0.1 + i * 0.08,
+      ease: [0.22, 1, 0.36, 1],
+    },
+  }),
+};
+
 export default function Services() {
   const ref = useRef(null);
   const inView = useInView(ref, { once: true, margin: "-80px" });
 
   return (
-    <section id="services" className="py-24 bg-surface">
+    <section id="services" className="py-24 bg-surface overflow-hidden">
       <div className="max-w-7xl mx-auto px-6">
         <div className="text-center mb-16" ref={ref}>
           <motion.p
@@ -74,9 +88,9 @@ export default function Services() {
             Our Services
           </motion.p>
           <motion.h2
-            initial={{ opacity: 0, y: 12 }}
+            initial={{ opacity: 0, y: 16 }}
             animate={inView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.4, delay: 0.1 }}
+            transition={{ duration: 0.5, delay: 0.1 }}
             className="section-heading max-w-2xl mx-auto"
           >
             Comprehensive care, tailored to your needs
@@ -89,10 +103,16 @@ export default function Services() {
             return (
               <motion.div
                 key={service.title}
-                initial={{ opacity: 0, y: 24 }}
-                animate={inView ? { opacity: 1, y: 0 } : {}}
-                transition={{ duration: 0.4, delay: 0.1 + i * 0.08 }}
-                className="group bg-white rounded-2xl overflow-hidden card-shadow hover:-translate-y-1 gold-top-border"
+                custom={i}
+                variants={cardVariants}
+                initial="hidden"
+                animate={inView ? "show" : "hidden"}
+                whileHover={{
+                  y: -8,
+                  boxShadow: "0 24px 60px rgba(60,170,53,0.18)",
+                  transition: { duration: 0.25 },
+                }}
+                className="group bg-white rounded-2xl overflow-hidden card-shadow gold-top-border cursor-pointer"
               >
                 {service.image && (
                   <div className="relative h-48 w-full overflow-hidden">
@@ -100,16 +120,20 @@ export default function Services() {
                       src={service.image}
                       alt={`${service.title} — MedHcareSwiss service`}
                       fill
-                      className="object-cover group-hover:scale-105 transition-transform duration-500"
+                      className="object-cover group-hover:scale-110 transition-transform duration-700"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-navy/40 to-transparent" />
                   </div>
                 )}
                 <div className="p-6">
-                  <div className="w-12 h-12 bg-gold/10 rounded-xl flex items-center justify-center mb-4 group-hover:bg-gold/20 transition-colors duration-300">
-                    <Icon className="w-6 h-6 text-gold" />
-                  </div>
-                  <h3 className="font-baskerville text-lg font-bold text-brand mb-2">
+                  <motion.div
+                    whileHover={{ rotate: [0, -8, 8, 0], scale: 1.1 }}
+                    transition={{ duration: 0.4 }}
+                    className="w-12 h-12 bg-[#3CAA35]/10 rounded-xl flex items-center justify-center mb-4 group-hover:bg-[#3CAA35]/20 transition-colors duration-300"
+                  >
+                    <Icon className="w-6 h-6 text-[#3CAA35]" />
+                  </motion.div>
+                  <h3 className="font-baskerville text-lg font-bold text-brand mb-2 group-hover:text-[#3CAA35] transition-colors duration-300">
                     {service.title}
                   </h3>
                   <p className="font-inter text-sm text-gray-600 leading-relaxed">

@@ -31,6 +31,20 @@ export default function WhyChooseUs() {
 
   return (
     <section className="relative py-24 bg-navy overflow-hidden">
+      {/* Animated background orbs */}
+      <motion.div
+        aria-hidden="true"
+        className="absolute -top-24 -left-24 w-96 h-96 rounded-full bg-[#3CAA35]/10 blur-3xl pointer-events-none"
+        animate={{ scale: [1, 1.15, 1], opacity: [0.5, 0.8, 0.5] }}
+        transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
+      />
+      <motion.div
+        aria-hidden="true"
+        className="absolute -bottom-24 -right-24 w-96 h-96 rounded-full bg-[#05427B]/60 blur-3xl pointer-events-none"
+        animate={{ scale: [1, 1.1, 1], opacity: [0.4, 0.7, 0.4] }}
+        transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
+      />
+
       {/* Background image overlay */}
       {/* eslint-disable-next-line @next/next/no-img-element */}
       <img
@@ -51,9 +65,9 @@ export default function WhyChooseUs() {
             Why MedHcareSwiss
           </motion.p>
           <motion.h2
-            initial={{ opacity: 0, y: 12 }}
+            initial={{ opacity: 0, y: 16 }}
             animate={inView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.4, delay: 0.1 }}
+            transition={{ duration: 0.5, delay: 0.1 }}
             className="section-heading-white max-w-2xl mx-auto"
           >
             World-class care, without the complexity
@@ -66,14 +80,32 @@ export default function WhyChooseUs() {
             return (
               <motion.div
                 key={pillar.title}
-                initial={{ opacity: 0, y: 24 }}
-                animate={inView ? { opacity: 1, y: 0 } : {}}
-                transition={{ duration: 0.4, delay: 0.15 + i * 0.1 }}
-                className="text-center p-8 rounded-2xl bg-white/5 border border-white/10 hover:bg-white/10 transition-colors duration-300"
+                initial={{ opacity: 0, y: 32, scale: 0.95 }}
+                animate={inView ? { opacity: 1, y: 0, scale: 1 } : {}}
+                transition={{
+                  duration: 0.55,
+                  delay: 0.15 + i * 0.12,
+                  ease: [0.22, 1, 0.36, 1],
+                }}
+              whileHover={{
+                scale: 1.04,
+                backgroundColor: "rgba(255,255,255,0.12)",
+                boxShadow: "0 0 40px rgba(60,170,53,0.2), inset 0 0 0 1px rgba(60,170,53,0.35)",
+              }}
+              className="text-center p-8 rounded-2xl bg-white/5 border border-white/10 transition-colors duration-300 cursor-default"
               >
-                <div className="w-16 h-16 bg-gold/15 rounded-2xl flex items-center justify-center mx-auto mb-6">
-                  <Icon className="w-8 h-8 text-gold" />
-                </div>
+                {/* Icon with floating animation */}
+                <motion.div
+                  animate={{ y: [-3, 3, -3] }}
+                  transition={{
+                    duration: 4 + i,
+                    repeat: Infinity,
+                    ease: "easeInOut",
+                  }}
+                  className="w-16 h-16 bg-[#3CAA35]/15 rounded-2xl flex items-center justify-center mx-auto mb-6"
+                >
+                  <Icon className="w-8 h-8 text-[#3CAA35]" />
+                </motion.div>
                 <h3 className="font-baskerville text-xl font-bold text-white mb-4">
                   {pillar.title}
                 </h3>
