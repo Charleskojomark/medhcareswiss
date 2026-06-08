@@ -53,11 +53,25 @@ export default function Specialists() {
           {specialists.map((specialist, i) => (
             <motion.div
               key={specialist.name}
-              initial={{ opacity: 0, y: 36, scale: 0.94 }}
-              animate={inView ? { opacity: 1, y: 0, scale: 1 } : {}}
+              initial={{
+                opacity: 0,
+                x: i === 0 ? -140 : 140,
+                y: 40,
+                rotate: i === 0 ? -6 : 6,
+                scale: 0.85,
+                filter: "blur(8px)",
+              }}
+              animate={inView ? {
+                opacity: 1,
+                x: 0,
+                y: 0,
+                rotate: 0,
+                scale: 1,
+                filter: "blur(0px)",
+              } : {}}
               transition={{
-                duration: 0.6,
-                delay: 0.15 + i * 0.15,
+                duration: 0.8,
+                delay: 0.15 + i * 0.18,
                 ease: [0.22, 1, 0.36, 1] as [number, number, number, number],
               }}
               whileHover={{

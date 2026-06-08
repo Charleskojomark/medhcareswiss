@@ -61,11 +61,25 @@ export default function Testimonials() {
           {testimonials.map((t, i) => (
             <motion.div
               key={i}
-              initial={{ opacity: 0, y: 28, scale: 0.96 }}
-              animate={inView ? { opacity: 1, y: 0, scale: 1 } : {}}
+              initial={{
+                opacity: 0,
+                x: i % 2 === 0 ? -100 : 100,
+                y: 30,
+                rotate: i % 2 === 0 ? -3 : 3,
+                scale: 0.9,
+                filter: "blur(5px)",
+              }}
+              animate={inView ? {
+                opacity: 1,
+                x: 0,
+                y: 0,
+                rotate: 0,
+                scale: 1,
+                filter: "blur(0px)",
+              } : {}}
               transition={{
-                duration: 0.55,
-                delay: 0.1 + i * 0.1,
+                duration: 0.65,
+                delay: 0.1 + i * 0.12,
                 ease: [0.22, 1, 0.36, 1] as [number, number, number, number],
               }}
               whileHover={{

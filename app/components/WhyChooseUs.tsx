@@ -80,11 +80,25 @@ export default function WhyChooseUs() {
             return (
               <motion.div
                 key={pillar.title}
-                initial={{ opacity: 0, y: 32, scale: 0.95 }}
-                animate={inView ? { opacity: 1, y: 0, scale: 1 } : {}}
+                initial={{
+                  opacity: 0,
+                  x: i === 0 ? -120 : i === 2 ? 120 : 0,
+                  y: i === 1 ? 80 : 20,
+                  rotate: i === 0 ? -5 : i === 2 ? 5 : 0,
+                  scale: 0.88,
+                  filter: "blur(6px)",
+                }}
+                animate={inView ? {
+                  opacity: 1,
+                  x: 0,
+                  y: 0,
+                  rotate: 0,
+                  scale: 1,
+                  filter: "blur(0px)",
+                } : {}}
                 transition={{
-                  duration: 0.55,
-                  delay: 0.15 + i * 0.12,
+                  duration: 0.7,
+                  delay: 0.15 + i * 0.15,
                   ease: [0.22, 1, 0.36, 1] as [number, number, number, number],
                 }}
               whileHover={{

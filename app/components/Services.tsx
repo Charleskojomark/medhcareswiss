@@ -57,19 +57,31 @@ const services = [
   },
 ];
 
-const cardVariants = {
-  hidden: { opacity: 0, y: 32, scale: 0.95 },
-  show: (i: number) => ({
+// Alternating left / right entrance — col position within 3-column grid
+// col 0 (i%3===0) → from left, col 1 (i%3===1) → from bottom, col 2 (i%3===2) → from right
+const getCardVariants = (i: number) => ({
+  hidden: {
+    opacity: 0,
+    x: i % 3 === 0 ? -120 : i % 3 === 2 ? 120 : 0,
+    y: i % 3 === 1 ? 60 : 20,
+    rotate: i % 3 === 0 ? -4 : i % 3 === 2 ? 4 : 0,
+    scale: 0.88,
+    filter: "blur(6px)",
+  },
+  show: {
     opacity: 1,
+    x: 0,
     y: 0,
+    rotate: 0,
     scale: 1,
+    filter: "blur(0px)",
     transition: {
-      duration: 0.55,
-      delay: 0.1 + i * 0.08,
+      duration: 0.65,
+      delay: 0.08 + i * 0.09,
       ease: [0.22, 1, 0.36, 1] as [number, number, number, number],
     },
-  }),
-};
+  },
+});
 
 export default function Services() {
   const ref = useRef(null);
@@ -103,10 +115,8 @@ export default function Services() {
             return (
               <motion.div
                 key={service.title}
-                custom={i}
-                variants={cardVariants}
-                initial="hidden"
-                animate={inView ? "show" : "hidden"}
+                initial={getCardVariants(i).hidden}
+                animate={inView ? getCardVariants(i).show : getCardVariants(i).hidden}
                 whileHover={{
                   y: -8,
                   boxShadow: "0 24px 60px rgba(60,170,53,0.18)",
