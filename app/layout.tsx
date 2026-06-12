@@ -21,6 +21,7 @@ export const metadata: Metadata = {
   title: "MedHcareSwiss | Premium Medical Tourism in Switzerland & Spain",
   description:
     "Your premium partner in value-based medical healthcare tourism services across Switzerland and Spain. Expert consultation, seamless care, end-to-end support.",
+  metadataBase: new URL("https://landing.medhcareswiss.com"),
   icons: {
     icon: [
       { url: "/favicon.ico",        sizes: "any" },
@@ -37,9 +38,25 @@ export const metadata: Metadata = {
   openGraph: {
     title: "MedHcareSwiss | Premium Medical Tourism in Switzerland & Spain",
     description:
-      "Your premium partner in value-based medical healthcare tourism services across Switzerland and Spain.",
+      "Your premium partner in value-based medical healthcare tourism services across Switzerland and Spain. Expert consultation, seamless care, end-to-end support.",
+    url: "https://landing.medhcareswiss.com",
+    siteName: "MedHcareSwiss",
     type: "website",
-    images: [{ url: "/icon-512.png", width: 512, height: 512 }],
+    images: [
+      {
+        url: "https://landing.medhcareswiss.com/og-image.png",
+        width: 1200,
+        height: 630,
+        alt: "MedHcareSwiss – Premium Medical Tourism in Switzerland & Spain",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "MedHcareSwiss | Premium Medical Tourism in Switzerland & Spain",
+    description:
+      "Your premium partner in value-based medical healthcare tourism services across Switzerland and Spain.",
+    images: ["https://landing.medhcareswiss.com/og-image.png"],
   },
 };
 
