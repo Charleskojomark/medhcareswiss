@@ -79,19 +79,19 @@ export default function Hero() {
         <source src="/assets/medh.mp4" type="video/mp4" />
       </video>
 
-      {/* Dark overlay */}
-      <div className="absolute inset-0 bg-navy/60" aria-hidden="true" />
+      {/* Subtle gradient overlay — keeps text legible without covering video */}
+      <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent" aria-hidden="true" />
 
       {/* Floating ambient orbs — GPU composited, no layout shifts */}
       <motion.div
         aria-hidden="true"
-        className="absolute top-[15%] left-[8%] w-64 h-64 rounded-full bg-[#3CAA35]/20 blur-3xl pointer-events-none"
+        className="absolute top-[15%] left-[8%] w-64 h-64 rounded-full bg-[#3CAA35]/8 blur-3xl pointer-events-none"
         animate={{ y: [-20, 20, -20], scale: [1, 1.08, 1] }}
         transition={{ duration: 9, repeat: Infinity, ease: "easeInOut" }}
       />
       <motion.div
         aria-hidden="true"
-        className="absolute bottom-[20%] right-[6%] w-80 h-80 rounded-full bg-[#05427B]/40 blur-3xl pointer-events-none"
+        className="absolute bottom-[20%] right-[6%] w-80 h-80 rounded-full bg-[#05427B]/15 blur-3xl pointer-events-none"
         animate={{ y: [20, -20, 20], scale: [1, 1.05, 1] }}
         transition={{ duration: 12, repeat: Infinity, ease: "easeInOut" }}
       />
