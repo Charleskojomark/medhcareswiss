@@ -76,7 +76,7 @@ export default function Hero() {
         poster="https://images.unsplash.com/photo-1586773860418-dc22f8b874bc?w=2070"
         aria-hidden="true"
       >
-        <source src="/assets/medh.mp4" type="video/mp4" />
+        <source src="/assets/medhswiss.mp4" type="video/mp4" />
       </video>
 
       {/* Subtle gradient overlay — keeps text legible without covering video */}
